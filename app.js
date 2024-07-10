@@ -5,8 +5,11 @@ var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 
 var router = require('./routes/router')
+const connectDB = require('./config/db')
+const sessionMiddleware = require('./config/session')
 
 var app = express()
+connectDB()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -17,6 +20,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(sessionMiddleware)
 
 app.use('/', router)
 
