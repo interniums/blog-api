@@ -1,10 +1,15 @@
 const mongoose = require('mongoose')
+const { CommentSchema } = require('./commentModel')
 
 const PostSchema = new mongoose.Schema({
   author: {
-    type: Schema.Types.ObjectId,
-    red: 'User',
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
+  },
+  img: {
+    url: [String],
+    default: [],
   },
   title: {
     type: String,
@@ -15,9 +20,10 @@ const PostSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
+    minLength: 24,
   },
   category: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
   dateCreated: {
@@ -26,6 +32,7 @@ const PostSchema = new mongoose.Schema({
   },
   edits: {
     type: [{ timestamp: Date }],
+    default: [],
   },
   comments: {
     type: [CommentSchema],
@@ -36,13 +43,10 @@ const PostSchema = new mongoose.Schema({
     default: false,
   },
   likes: {
-    type: Schema.Types.ObjectId,
+    type: [mongoose.Schema.Types.ObjectId],
     ref: 'User',
-  },
-  tags: {
-    type: [Schema.Types.ObjectId],
     default: [],
   },
 })
 
-exports.module = mongoose.model('Post', PostSchema)
+module.exports = mongoose.model('Post', PostSchema)

@@ -6,7 +6,7 @@ const CommentSchema = new mongoose.Schema({
     default: Date.now(),
   },
   author: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: 'User',
   },
@@ -15,12 +15,12 @@ const CommentSchema = new mongoose.Schema({
     required: true,
   },
   parentComment: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Comment',
     required: false,
   },
   likes: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: false,
     edits: {
@@ -29,4 +29,4 @@ const CommentSchema = new mongoose.Schema({
   },
 })
 
-exports.module = mongoose.model('Comment', CommentSchema)
+module.exports = mongoose.model('Comment', CommentSchema)

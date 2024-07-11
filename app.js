@@ -1,14 +1,14 @@
-var createError = require('http-errors')
-var express = require('express')
-var path = require('path')
-var cookieParser = require('cookie-parser')
-var logger = require('morgan')
-
-var router = require('./routes/router')
+const createError = require('http-errors')
+const express = require('express')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
+const userRoutes = require('./routes/userRoutes')
+const postRoutes = require('./routes/postRoutes')
 const connectDB = require('./config/db')
 const sessionMiddleware = require('./config/session')
 
-var app = express()
+const app = express()
 connectDB()
 
 // view engine setup
@@ -22,7 +22,8 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(sessionMiddleware)
 
-app.use('/', router)
+app.use('/', userRoutes)
+app.use('/', postRoutes)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
