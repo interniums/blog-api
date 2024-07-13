@@ -1,5 +1,6 @@
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const dotenv = require('dotenv')
 
 const sessionMiddleware = session({
   name: 'some_session_name',
