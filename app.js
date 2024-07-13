@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const userRoutes = require('./routes/userRoutes')
 const postRoutes = require('./routes/postRoutes')
+const router = require('./routes/index')
 const connectDB = require('./config/db')
 const sessionMiddleware = require('./config/session')
 
@@ -22,6 +23,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(sessionMiddleware)
 
+app.use('/', router)
 app.use('/', userRoutes)
 app.use('/', postRoutes)
 
