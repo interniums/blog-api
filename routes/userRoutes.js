@@ -5,7 +5,7 @@ const userController = require('../controllers/userController')
 userRoutes
   .route('/user')
   .get(userController.getAllUsers)
-  .post(userController.createUser)
+  // .post(userController.createUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser)
 

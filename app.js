@@ -11,6 +11,7 @@ const connectDB = require('./config/db')
 const sessionMiddleware = require('./config/session')
 const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
+const authRoutes = require('./routes/authRoutes')
 
 const app = express()
 connectDB()
@@ -31,6 +32,7 @@ app.use('/', router)
 app.use('/', userRoutes)
 app.use('/', postRoutes)
 app.use('/', categoryRoutes)
+app.use('/', authRoutes)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

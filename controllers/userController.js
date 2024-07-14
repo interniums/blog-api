@@ -16,37 +16,37 @@ const getAllUsers = asyncHandler(async (req, res, next) => {
 // desc: create new user
 // route: POST /users
 // access: Private
-const createUser = asyncHandler(async (req, res, next) => {
-  const { username, email, password } = req.body
+// const createUser = asyncHandler(async (req, res, next) => {
+//   const { username, email, password } = req.body
 
-  // confirm data
-  if (!username || !password || !email) {
-    return res.status(400).json({ message: 'All fields are required.' })
-  }
+//   // confirm data
+//   if (!username || !password || !email) {
+//     return res.status(400).json({ message: 'All fields are required.' })
+//   }
 
-  // check duplicates
-  const duplicateUsername = await User.findOne({ username }).lean().exec()
-  const duplicateEmail = await User.findOne({ email }).lean().exec()
-  if (duplicateUsername) {
-    return res.status(409).json({ message: 'Username already in use.' })
-  }
-  if (duplicateEmail) {
-    return res.status(409).json({ message: 'Email already in use.' })
-  }
+//   // check duplicates
+//   const duplicateUsername = await User.findOne({ username }).lean().exec()
+//   const duplicateEmail = await User.findOne({ email }).lean().exec()
+//   if (duplicateUsername) {
+//     return res.status(409).json({ message: 'Username already in use.' })
+//   }
+//   if (duplicateEmail) {
+//     return res.status(409).json({ message: 'Email already in use.' })
+//   }
 
-  // hash password
-  const hashedPassword = await bcrypt.hash(password, 10)
+//   // hash password
+//   const hashedPassword = await bcrypt.hash(password, 10)
 
-  // create and store new user
-  const userObject = { username, password: hashedPassword, email }
-  const user = await User.create(userObject)
+//   // create and store new user
+//   const userObject = { username, password: hashedPassword, email }
+//   const user = await User.create(userObject)
 
-  if (user) {
-    res.status(201).json({ message: `New user ${username} created.` })
-  } else {
-    res.status(400).json({ message: 'Invalid user data recieved.' })
-  }
-})
+//   if (user) {
+//     res.status(201).json({ message: `New user ${username} created.` })
+//   } else {
+//     res.status(400).json({ message: 'Invalid user data recieved.' })
+//   }
+// })
 
 // desc: update user
 // route: PATCH /users
@@ -111,7 +111,7 @@ const deleteUser = asyncHandler(async (req, res, next) => {
 
 module.exports = {
   getAllUsers,
-  createUser,
+  // createUser,
   updateUser,
   deleteUser,
 }
