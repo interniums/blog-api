@@ -7,11 +7,13 @@ const userRoutes = require('./routes/userRoutes')
 const postRoutes = require('./routes/postRoutes')
 const router = require('./routes/index')
 const categoryRoutes = require('./routes/categoryRoutes')
+const authRoutes = require('./auth/authRoutes')
+const refreshRoutes = require('./auth/refreshRoutes')
+const logoutRoutes = require('./auth/logoutRoutes')
 const connectDB = require('./config/db')
 const sessionMiddleware = require('./config/session')
 const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
-const authRoutes = require('./routes/authRoutes')
 
 const app = express()
 connectDB()
@@ -33,6 +35,8 @@ app.use('/', userRoutes)
 app.use('/', postRoutes)
 app.use('/', categoryRoutes)
 app.use('/', authRoutes)
+app.use('/refresh', refreshRoutes)
+app.use('/logout', logoutRoutes)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
